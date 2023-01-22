@@ -39,18 +39,11 @@ final class BookService {
     private func getBooks() -> [Book] {
         guard let database = database else { return [] }
         let table = Table(BookDatabase.table)
-        let id = Expression<String>(BookDatabase.Keys.bookID.rawValue)
-        let title = Expression<String>(BookDatabase.Keys.title.rawValue)
-        let author = Expression<String>(BookDatabase.Keys.author.rawValue)
-        
-        let query = table.select(id, title, author)
-        
-        guard let rows = try? database.prepare(query) else { return [] }
-        
-        return rows.reduce(into: [Book]()) { partialResult, row in
-            let book = Book(id: row[id], title: row[title], author: row[author])
-            partialResult.append(book)
+        let books: [Book]? = try? database.prepare(table).map { row in
+            return try row.decode()
         }
+        guard let books = books else { return [] }
+        return books
     }
 }
 

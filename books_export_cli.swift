@@ -32,13 +32,14 @@ extension BooksExport {
         
         mutating func run() {
             let fileWriteService = FileWriteService(
-                path: FileManager.default.currentDirectoryPath + "/output.txt"
+                path: FileManager.default.currentDirectoryPath + "/output.md"
             )
             let highlights = HighlightService(
                 bookID: bookID,
                 fileWriteService: fileWriteService,
                 databaseConnection: Dependencies.databaseConnection,
-                pathBuilder: Dependencies.pathBuilder
+                pathBuilder: Dependencies.pathBuilder,
+                outputBuilder: Dependencies.outputBuilder
             )
             highlights.generateOutputFile()
         }

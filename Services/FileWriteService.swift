@@ -1,7 +1,7 @@
 import Foundation
 import FileProvider
 
-class FileWriteService {
+final class FileWriteService {
 
     private let fileManager: FileManager
     
