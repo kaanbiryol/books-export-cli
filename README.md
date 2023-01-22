@@ -1,6 +1,6 @@
 # books-export-cli
 
-it seems apple [disabled](https://discussions.apple.com/thread/254205334) exporting multiple highlights, this tool will help you export your highlights as markdown.  
+it seems apple [disabled](https://discussions.apple.com/thread/254205334) exporting multiple highlights, this tool will help you export your highlights as markdown.
 
 1. `make build`
 2. `./books-export-cli list` to list existing books.
