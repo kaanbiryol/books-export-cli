@@ -32,7 +32,7 @@ final class HighlightService {
         
         let highlightCreationDateExpression = Expression<String?>(Highlight.CodingKeys.creationDate.rawValue)
         let bookIDExpression = Expression<String>(Highlight.CodingKeys.bookID.rawValue)
-        let query = table.where(bookID == bookIDExpression).order(highlightCreationDateExpression.desc)
+        let query = table.where(bookID == bookIDExpression).order(highlightCreationDateExpression.asc)
         
         let highlights: [Highlight]? = try? database.prepare(query).map { row in
             return try row.decode()
@@ -50,7 +50,7 @@ final class HighlightService {
             }
             try fileWriteService.closeFile()
         } catch {
-            fatalError()
+            print(error)
         }
     }
     

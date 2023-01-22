@@ -21,8 +21,8 @@ final class FileWriteService {
     }
     
     public func writeToFile(value: String) throws {
-        guard let file = file else { fatalError() }
-        guard let data = value.data(using: .utf8) else { fatalError() }
+        guard let file = file else { throw CLIError.message("error opening file") }
+        guard let data = value.data(using: .utf8) else { throw CLIError.message("error converting text to data") }
         try file.seekToEnd()
         try file.write(contentsOf: data)
     }

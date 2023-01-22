@@ -8,8 +8,7 @@ final class OutputBuilder {
             passSameSection(for: section, previousHighlight: previousHighlight, output: &output)
         }
         if let selectedText = highlight.selectedText?.trimmingCharacters(in: .whitespaces), !selectedText.isEmpty {
-            print(selectedText)
-            output += "> \(selectedText)"
+            output += "> " + removeExtraSpaces(input: selectedText)
         }
         if let note = highlight.note?.trimmingCharacters(in: .whitespaces), !note.isEmpty {
             output += "\n\n" + note
@@ -29,11 +28,6 @@ final class OutputBuilder {
     }
     
     private func removeExtraSpaces(input: String) -> String {
-        return input.replacingOccurrences(
-            of: "\\s*(\\p{Po}\\s?)\\s*",
-            with: "$1",
-            options: [.regularExpression]
-        )
+        return String(input.filter { !"\n\t\r".contains($0) })
     }
-    
 }
